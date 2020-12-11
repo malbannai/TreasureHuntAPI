@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "whalez",
-    "password": null,
-    "database": "treasurehunt_db",
-    "host": "127.0.0.1",
+    "username": "postgres",
+    "password": "password",
+    "database": "hunt_db",
+    "host": "localhost",
     "dialect": "postgres",
     "logging": false
   },
