@@ -24,7 +24,6 @@ exports.signup = async (req, res, next) => {
 };
 
 exports.signin = async (req, res, next) => {
-  //   console.log("issue in signin");
   const { user } = req;
   try {
     const payload = {
@@ -34,9 +33,10 @@ exports.signin = async (req, res, next) => {
     };
     user.loggedIn = true;
     await user.save();
-    // await User.update({ ...user, loggedIn: true });
     const token = jwt.sign(JSON.stringify(payload), "asupersecretkey");
-    // console.log("issue in signin token:" + token);
+    const decoded = jwt.verify(token, "asupersecretkey");
+    const userId = decoded.id;
+    console.log(userId);
     res.json({ token });
   } catch (error) {
     next(error);

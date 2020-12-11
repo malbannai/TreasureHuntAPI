@@ -4,10 +4,7 @@ const { fromAuthHeaderAsBearerToken } = require("passport-jwt").ExtractJwt;
 const bcrypt = require("bcrypt");
 const { User } = require("../db/models");
 
-console.log("Im in line 6");
-
 exports.localStrategy = new LocalStrategy(async (username, password, done) => {
-  console.log("issue in localStrategy");
   try {
     const user = await User.findOne({
       where: { email: username },
@@ -27,7 +24,6 @@ exports.localStrategy = new LocalStrategy(async (username, password, done) => {
       done(null, false);
     }
   } catch (error) {
-    console.log("issue in localStrategy" + error);
     done(error);
   }
 });
@@ -47,9 +43,7 @@ exports.jwtStrategy = new JWTStrategy(
     try {
       const user = await User.findByPk(jwtPayload.id);
       done(null, user); // if there is no user, this will throw a 401
-      console.log("issue in jwtStrategy try" + error);
     } catch (error) {
-      console.log("issue in jwtStrategy" + error);
       done(error);
     }
   }
